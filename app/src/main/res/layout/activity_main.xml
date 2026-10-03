@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_main.xml — Panel de control del proyecto integrador FROSTER
+    Semana 5 · Emilio Garduño Servin · Equipo 01
+
+    Toda la jerarquia se arma con LinearLayout anidados, tal como pide la
+    practica. El criterio de anidamiento es:
+
+      ScrollView                        permite que el panel crezca sin recortar
+       └─ LinearLayout  (vertical)      columna principal del panel
+           ├─ LinearLayout (vertical)   bloque 1: encabezado y conexion
+           ├─ LinearLayout (vertical)   bloque 2: telemetria
+           │   └─ LinearLayout (horiz.) fila de dos lecturas lado a lado
+           ├─ LinearLayout (vertical)   bloque 3: mando del LED (Switch + Button)
+           │   └─ LinearLayout (horiz.) fila del Switch
+           ├─ LinearLayout (vertical)   bloque 4: PWM con SeekBar 0-255
+           └─ LinearLayout (horiz.)     bloque 5: relay con ImageButton
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/raizPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo_panel"
+    android:fillViewport="true"
+    tools:context=".ui.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- BLOQUE 1 · Encabezado y estado de la conexion -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tituloPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/panel_titulo"
+                android:textColor="@color/texto"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/subtituloPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/panel_subtitulo"
+                android:textColor="@color/texto_tenue"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/textoConexion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/fondo_tarjeta"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/texto_tenue"
+                android:textSize="13sp"
+                tools:text="Conectado a Firebase · nodo en linea" />
+        </LinearLayout>
+
+        <!-- BLOQUE 2 · Telemetria recibida de la ESP32 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/fondo_tarjeta"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/seccion_telemetria"
+                android:textColor="@color/azul_claro"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <!-- Fila horizontal: temperatura y humedad -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/etq_temperatura"
+                        android:textColor="@color/texto_tenue"
+                        android:textSize="12sp" />
+
+                    <!-- Este TextView cambia a rojo al superar el umbral -->
+                    <TextView
+                        android:id="@+id/valorTemperatura"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/texto"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        tools:text="26.4 °C" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/etq_humedad_dht"
+                        android:textColor="@color/texto_tenue"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/valorHumedadDht"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/texto"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        tools:text="48.1 %" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Fila horizontal: LDR -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/etq_ldr"
+                    android:textColor="@color/texto_tenue"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/valorLdr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/texto"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="62 %" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textoAlerta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:padding="6dp"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="Temperatura sobre el umbral critico" />
+
+            <TextView
+                android:id="@+id/textoUmbral"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/texto_tenue"
+                android:textSize="12sp"
+                tools:text="Umbral critico: 27.0 °C (configurable en Ajustes)" />
+        </LinearLayout>
+
+        <!-- BLOQUE 3 · Mando binario del LED1: Switch y Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/fondo_tarjeta"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/seccion_led"
+                android:textColor="@color/azul_claro"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ayuda_led"
+                android:textColor="@color/texto_tenue"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/estadoLed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:textColor="@color/texto"
+                    android:textSize="16sp"
+                    tools:text="LED1: APAGADO" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchLed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/botonAlternarLed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/boton_alternar_led" />
+        </LinearLayout>
+
+        <!-- BLOQUE 4 · Control PWM con SeekBar de 0 a 255 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/fondo_tarjeta"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/seccion_pwm"
+                android:textColor="@color/azul_claro"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ayuda_pwm"
+                android:textColor="@color/texto_tenue"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/valorBrillo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:textColor="@color/texto"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                tools:text="128 / 255" />
+
+            <!-- max=255: el ciclo de trabajo del canal LEDC de 8 bits -->
+            <SeekBar
+                android:id="@+id/deslizadorBrillo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="255" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/pwm_min"
+                    android:textColor="@color/texto_tenue"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pwm_max"
+                    android:textColor="@color/texto_tenue"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- BLOQUE 5 · Relay con ImageButton que cambia de icono -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/fondo_tarjeta"
+            android:orientation="horizontal"
+            android:padding="14dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/seccion_relay"
+                    android:textColor="@color/azul_claro"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/estadoRelay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/texto"
+                    android:textSize="16sp"
+                    tools:text="Relay: ABIERTO" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ayuda_relay"
+                    android:textColor="@color/texto_tenue"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/botonRelay"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center_vertical"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/desc_relay"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_relay_off" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/botonAjustesPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="@string/boton_ajustes" />
+
+        <Button
+            android:id="@+id/botonMonitor"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/boton_monitor"
+            android:textColor="@color/texto_tenue" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.FrosterApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/azul_froster</item>
+        <item name="colorPrimaryVariant">@color/azul_froster</item>
+        <item name="colorOnPrimary">@color/blanco</item>
+        <item name="colorSecondary">@color/azul_claro</item>
+        <item name="colorOnSecondary">@color/blanco</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/azul_froster</item>
+    </style>
+</resources>

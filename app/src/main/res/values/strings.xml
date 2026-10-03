@@ -1,0 +1,112 @@
+<resources>
+    <string name="app_name">FROSTER</string>
+    <string name="titulo_principal">FROSTER · Monitor del clúster</string>
+    <string name="titulo_ajustes">Ajustes de alerta</string>
+
+    <string name="etq_luz">Luz</string>
+    <string name="etq_temp">Temperatura</string>
+    <string name="etq_humedad">Humedad</string>
+    <string name="etq_rocio">Punto de rocío</string>
+    <string name="etq_actuadores">Actuadores</string>
+    <string name="etq_led">LED</string>
+    <string name="etq_ventilador">Ventilador</string>
+    <string name="etq_peltier">Peltier</string>
+
+    <string name="boton_ajustes">Ajustes</string>
+    <string name="boton_guardar">Guardar umbral</string>
+    <string name="boton_restablecer">Restablecer</string>
+
+    <string name="titulo_umbral_luz">Umbral mínimo de luz</string>
+    <string name="ayuda_umbral_luz">Se emite alerta cuando la luz medida cae por debajo de este porcentaje.</string>
+    <string name="titulo_umbral_temp">Umbral máximo de temperatura</string>
+    <string name="ayuda_umbral_temp">Se emite alerta cuando la temperatura supera este valor. ASHRAE recomienda no pasar de 27 °C en la entrada de aire.</string>
+    <string name="titulo_alertas">Alertas activas</string>
+
+    <string name="estado_normal">Todo en rango</string>
+    <string name="estado_luz_baja">Alerta: luz por debajo del umbral</string>
+    <string name="estado_temp_alta">Alerta: temperatura sobre el umbral</string>
+    <string name="estado_ambas">Alerta doble: luz baja y temperatura alta</string>
+
+    <string name="fmt_porcentaje">%1$d %%</string>
+    <string name="fmt_porcentaje_f">%1$.1f %%</string>
+    <string name="fmt_grados">%1$.1f °C</string>
+    <string name="fmt_nodo">%1$s · paquete #%2$d</string>
+    <string name="fmt_rssi">RSSI %1$d dBm</string>
+    <string name="fmt_umbrales">Umbrales guardados: luz &lt; %1$d %% · temp &gt; %2$.1f °C</string>
+    <string name="fmt_umbral_luz">%1$d %%</string>
+    <string name="fmt_umbral_temp">%1$.1f °C</string>
+    <string name="mensaje_guardado">Guardado en DataStore: luz %1$d %%, temp %2$.1f °C</string>
+    <string name="mensaje_restablecido">Valores de fábrica restablecidos</string>
+
+    <!-- ===== Semana 5 · Panel de control ===== -->
+    <string name="panel_titulo">FROSTER · Panel de control</string>
+    <string name="panel_subtitulo">Rack 01 · nodo esp32_01 · vía Firebase Realtime Database</string>
+
+    <string name="seccion_telemetria">TELEMETRÍA DEL RACK</string>
+    <string name="seccion_led">BALIZA DE ESTADO (LED1)</string>
+    <string name="seccion_pwm">VELOCIDAD DE VENTILADORES (PWM)</string>
+    <string name="seccion_relay">CONTACTOR DE LA CELDA PELTIER</string>
+
+    <string name="etq_temperatura">Temperatura (DHT11)</string>
+    <string name="etq_humedad_dht">Humedad (DHT11)</string>
+    <string name="etq_ldr">Luz del gabinete (LDR)</string>
+
+    <string name="ayuda_led">Enciende la baliza del rack. Escribe en el nodo led1.</string>
+    <string name="ayuda_pwm">Ciclo de trabajo del canal LEDC de la ESP32. Escribe en brillo_led al soltar.</string>
+    <string name="ayuda_relay">Alimenta la celda termoeléctrica de pre-enfriamiento. Nodo relay.</string>
+    <string name="desc_relay">Alternar el contactor del relay</string>
+
+    <string name="boton_alternar_led">Alternar LED1</string>
+    <string name="boton_monitor">Ver monitor MQTT (Semana 4)</string>
+
+    <string name="pwm_min">0 · ventiladores al mínimo</string>
+    <string name="pwm_max">255 · máximo</string>
+
+    <string name="encendido">ENCENDIDO</string>
+    <string name="apagado">APAGADO</string>
+    <string name="cerrado">CERRADO</string>
+    <string name="abierto">ABIERTO</string>
+    <string name="sin_dato">— —</string>
+
+    <string name="fmt_brillo">%1$d / 255</string>
+    <string name="fmt_estado_led">LED1: %1$s</string>
+    <string name="fmt_estado_relay">Relay: %1$s</string>
+    <string name="fmt_umbral_critico">Umbral crítico: %1$.1f °C · luz mínima %2$d %% (se configura en Ajustes)</string>
+
+    <string name="alerta_ninguna">Todo dentro de rango</string>
+    <string name="alerta_temp">Temperatura sobre el umbral crítico</string>
+    <string name="alerta_luz">Luz del gabinete por debajo del mínimo</string>
+    <string name="alerta_ambas">Alerta doble: temperatura crítica y luz baja</string>
+
+    <string name="conexion_autenticando">Autenticando con Firebase…</string>
+    <string name="conexion_ok">Conectado a Firebase · nodo en línea · %1$s</string>
+    <string name="conexion_nodo_caido">Conectado a Firebase · la ESP32 no reporta</string>
+    <string name="conexion_sin_datos">Conectado a Firebase · aún sin datos en froster/</string>
+    <string name="conexion_error">Sin conexión con Firebase: %1$s</string>
+
+    <!-- ===== Correccion S4 · MQTT por Wi-Fi ===== -->
+    <string name="mqtt_sin_configurar">Falta la IP del broker. Escríbela en Ajustes.</string>
+    <string name="mqtt_conectando">MQTT · conectando a %1$s…</string>
+    <string name="mqtt_conectado">MQTT · conectado a %1$s · esperando datos de la ESP32</string>
+    <string name="mqtt_recibiendo">MQTT · recibiendo de %1$s · paquete #%2$d</string>
+    <string name="mqtt_error">MQTT · sin conexión con %1$s: %2$s</string>
+    <string name="fmt_ip_telefono">Este teléfono en la red Wi-Fi: %1$s</string>
+
+    <string name="titulo_broker">Broker MQTT (Mosquitto)</string>
+    <string name="ayuda_broker">IP de la computadora con Mosquitto en la MISMA red Wi-Fi que el teléfono. En Ubuntu se consulta con: ip -4 addr. No uses localhost: en el teléfono apunta al propio teléfono.</string>
+    <string name="hint_broker_host">Ej. 192.168.150.215</string>
+    <string name="hint_broker_puerto">1883</string>
+    <string name="mensaje_broker_guardado">Broker guardado: %1$s</string>
+
+    <!-- ===== Semana 6 · Historial en Room ===== -->
+    <string name="titulo_historial">Historial local (Room)</string>
+    <string name="boton_historial">Ver historial guardado</string>
+    <string name="historial_origen">Cada paquete MQTT que llega se guarda como 4 filas en la tabla historial_sensores. Lo más reciente arriba.</string>
+    <string name="historial_vacio">Todavía no hay lecturas. Abre el monitor MQTT con la ESP32 publicando y aparecerán aquí.</string>
+    <string name="fmt_total_historial">%1$d lecturas en Room · %2$d en alerta</string>
+    <string name="etiqueta_alerta">ALERTA</string>
+    <string name="sensor_luz">Luz</string>
+    <string name="sensor_temperatura">Temperatura</string>
+    <string name="sensor_humedad">Humedad</string>
+    <string name="sensor_rocio">Punto de rocío</string>
+</resources>

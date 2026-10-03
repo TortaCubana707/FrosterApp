@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="negro">#FF000000</color>
+    <color name="blanco">#FFFFFFFF</color>
+
+    <color name="azul_froster">#FF1F4E79</color>
+    <color name="azul_claro">#FF2E75B6</color>
+
+    <!-- Fondos que cambian segun el nivel de alerta -->
+    <color name="fondo_normal">#FF12351F</color>
+    <color name="fondo_aviso">#FF4A3A0E</color>
+    <color name="fondo_alerta">#FF5A1512</color>
+
+    <color name="tarjeta">#FF161B22</color>
+    <color name="linea">#FF262C36</color>
+    <color name="texto">#FFE6EDF3</color>
+    <color name="texto_tenue">#FF8B949E</color>
+
+    <!-- Semana 5 -->
+    <color name="fondo_panel">#FF0E1117</color>
+    <color name="alerta_texto">#FFF85149</color>
+    <color name="aviso_texto">#FFD29922</color>
+    <color name="ok_texto">#FF3FB950</color>
+</resources>

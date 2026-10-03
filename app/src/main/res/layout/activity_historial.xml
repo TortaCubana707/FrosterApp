@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Pantalla del historial local (Semana 6). Un LinearLayout vertical con un
+    encabezado fijo y debajo el RecyclerView, que ocupa todo el alto restante
+    gracias a layout_height="0dp" + layout_weight="1".
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo_panel"
+    android:orientation="vertical"
+    tools:context=".ui.HistorialActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/textoTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/texto"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="248 lecturas guardadas en Room" />
+
+        <TextView
+            android:id="@+id/textoOrigen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/historial_origen"
+            android:textColor="@color/texto_tenue"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- Se muestra sólo cuando la tabla está vacía -->
+    <TextView
+        android:id="@+id/textoVacio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="32dp"
+        android:text="@string/historial_vacio"
+        android:textColor="@color/texto_tenue"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <!--
+        RecyclerView: sólo crea las vistas que caben en pantalla (unas 12) y las
+        RECICLA al desplazarse, cambiándoles el contenido. Con miles de filas en
+        Room la lista sigue fluida porque nunca existen miles de vistas.
+    -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listaHistorial"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="12dp"
+        tools:listitem="@layout/item_registro" />
+</LinearLayout>
